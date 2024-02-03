@@ -1,0 +1,27 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="flex items-center justify-center">
+    <div class="w-full max-w-md">
+        <h1 class="text-4xl text-center mb-6">Signup</h1>
+        <form method="POST" class="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="p-2">
+                <label for="{{ field.id_for_label }}" class="text-bold">{{ field.label }}</label>
+                {{ field }}
+                {% for error in field.errors %}
+                <span class="text-gray-700 text-sm">{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <!-- Apply Tailwind CSS classes to style buttons -->
+            <button type="submit"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none w-full">Signup</button>
+
+            <!-- Apply Tailwind CSS classes to style links -->
+            <a href="{% url 'login' %}" class="block mt-4 text-blue-500 hover:underline">Already have an account?</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
